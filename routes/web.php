@@ -21,9 +21,29 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/client/login','Auth\ClientLoginController@showLoginForm')->name('client.login');
 Route::post('/client/login','Auth\ClientLoginController@login')->name('client.login.submit');
-Route::get('/client', 'clientController@index')->name('client.dashboard');
+Route::get('/client', 'ClientController@index')->name('client.dashboard');
 
 Route::get('/client/register','Auth\ClientRegisterController@showRegistrationForm')->name('client.register');
 Route::post('/client/register','Auth\ClientRegisterController@register')->name('client.register.submit');
 
 Route::resource('/startups','StartupController');
+
+
+   //password ressets routes for client
+Route::post('/client/password/email','Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
+Route::get('/client/password/reset','Auth\ClientForgotPasswordController@showLinkRequestForm')->name('client.password.request');
+Route::post('/client/password/reset','Auth\ClientResetPasswordController@reset');
+Route::get('/client/password/reset/{token}','Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
+
+
+
+
+
+
+
+
+
+
+
+
+
