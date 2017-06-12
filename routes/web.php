@@ -18,7 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+//user profile
+Route::get('profile','HomeController@profile')->name('user_profile');
+Route::post('profile','HomeController@update_avatar');
+//client profile
+Route::get('/client/profile','ClientController@profile')->name('client_profile');
+Route::post('/client/profile','ClientController@update_avatar');
 
+    // authentification for the client
 Route::get('/client/login','Auth\ClientLoginController@showLoginForm')->name('client.login');
 Route::post('/client/login','Auth\ClientLoginController@login')->name('client.login.submit');
 Route::get('/client', 'ClientController@index')->name('client.dashboard');
@@ -26,6 +33,7 @@ Route::get('/client', 'ClientController@index')->name('client.dashboard');
 Route::get('/client/register','Auth\ClientRegisterController@showRegistrationForm')->name('client.register');
 Route::post('/client/register','Auth\ClientRegisterController@register')->name('client.register.submit');
 
+   // crud for the startup
 Route::resource('/startups','StartupController');
 
 

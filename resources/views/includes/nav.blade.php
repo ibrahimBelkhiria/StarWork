@@ -1,3 +1,4 @@
+@inject('test','App\Utilities\Test')
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -11,9 +12,16 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ url('/') }}">
+            @if($test->isClient())
+            <a class="navbar-brand" href="{{ url('/client') }}">
                 {{ config('app.name', 'Starwork') }}
             </a>
+            @else
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Starwork') }}
+                </a>
+            @endif
+
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -25,12 +33,14 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if (Auth::guest())
+                @if (Auth::guest()  )
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
                 @else
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position: relative;padding-left: 50px;">
+                            <img src="/storage/avatars/{{Auth::user()->avatar}}" style="width: 32px;height: 32px;position: absolute;top: 10px;left: 10px;border-radius: 50%;">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
@@ -46,6 +56,15 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
+
+                            {{-- we must render the client to his profile and the user to his profile,so we should make
+                                a test on the type of loged in user
+                             --}}
+                            @if($test->isClient())
+                                <li><a href="{{url('/client/profile')}}">Profile</a></li>
+                            @else
+                            <li><a href="{{url('/profile')}}">Profile</a></li>
+                            @endif
                         </ul>
                     </li>
                 @endif
