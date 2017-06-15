@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //user profile
 Route::get('profile','HomeController@profile')->name('user_profile');
 Route::post('profile','HomeController@update_avatar');
-//client profile
+   // client profile
 Route::get('/client/profile','ClientController@profile')->name('client_profile');
 Route::post('/client/profile','ClientController@update_avatar');
 
@@ -35,7 +35,8 @@ Route::post('/client/register','Auth\ClientRegisterController@register')->name('
 
    // crud for the startup
 Route::resource('/startups','StartupController');
-
+   // crud for the projects
+Route::resource('/projects','ProjectController');
 
    //password ressets routes for client
 Route::post('/client/password/email','Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
