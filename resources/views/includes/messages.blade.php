@@ -11,7 +11,7 @@
 
 @if(session('success'))
 
-    <div class="alert alert-success">
+    <div class="alert alert-success" id="flash-messages">
         {{session('success')}}
     </div>
 

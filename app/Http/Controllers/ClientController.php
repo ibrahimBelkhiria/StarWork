@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class ClientController extends Controller
 {
     /**
@@ -23,8 +25,13 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('client');
+        $projects = Project::all();
+        return view('client',compact('projects'));
     }
+
+
+
+
     public function profile()
     {
         return view('client_profile',array('user'=>Auth::user()));

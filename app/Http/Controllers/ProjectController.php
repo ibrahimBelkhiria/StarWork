@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\Project;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -23,7 +25,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+
+
     }
 
     /**
@@ -33,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -42,9 +45,19 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $this->validate(\request(),[
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'price' => 'required|numeric'
+        ]);
+
+        auth()->user()->applyProject(new Project(\request([
+            'title','description','price'
+        ])));
+        return redirect()->route('client.dashboard');
+
     }
 
     /**
@@ -53,9 +66,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('project.show',compact('project'));
     }
 
     /**
@@ -64,9 +77,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('project.edit',compact('project'));
     }
 
     /**
@@ -78,7 +91,20 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(\request(),[
+            'title' => 'required|min:5',
+            'description' => 'required|min:5',
+            'price' => 'required|numeric'
+        ]);
+        $project = Project::find($id);
+        $project->title=$request->input('title');
+        $project->description=$request->input('description');
+        $project->price=$request->price;
+
+        $project->save();
+
+        return redirect()->route('client.dashboard');
+
     }
 
     /**
@@ -87,8 +113,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        session()->flash('success','your project is deleted');
+        return back();
     }
 }

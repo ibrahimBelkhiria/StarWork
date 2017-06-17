@@ -18,7 +18,7 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**
@@ -35,7 +35,10 @@ class Client extends Authenticatable
        return $this->hasMany('App\Project');
     }
 
-
+    public function applyProject(Project $project)
+    {
+        $this->projects()->save($project);
+    }
 
 
 
