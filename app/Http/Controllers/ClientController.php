@@ -25,8 +25,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
-        return view('client',compact('projects'));
+
+        return view('client');
     }
 
 

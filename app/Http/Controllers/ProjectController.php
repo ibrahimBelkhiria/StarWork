@@ -25,7 +25,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-
+        $projects = Project::all();
+        return view('project.index',compact('projects'));
 
     }
 
@@ -56,7 +57,7 @@ class ProjectController extends Controller
         auth()->user()->applyProject(new Project(\request([
             'title','description','price'
         ])));
-        return redirect()->route('client.dashboard');
+        return redirect()->route('projects');
 
     }
 
@@ -79,6 +80,12 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+
+        if (auth('client')->user()->id !==$project->client_id)
+        {
+            return redirect('/client/project')->with('error','You are not authorized to see this !');
+        }
+
         return view('project.edit',compact('project'));
     }
 
@@ -103,7 +110,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-        return redirect()->route('client.dashboard');
+        return redirect()->route('projects');
 
     }
 
@@ -115,6 +122,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        if (auth('client')->user()->id !==$project->client_id)
+        {
+            return redirect('/client/project')->with('error','You are not authorized to delete  this project !');
+        }
+
+
         $project->delete();
         session()->flash('success','your project is deleted');
         return back();

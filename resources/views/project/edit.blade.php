@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h3>edit a Startup</h3>
+    <h3>edit a Project</h3>
     <hr>
     <div class="container">
         <div class="row">

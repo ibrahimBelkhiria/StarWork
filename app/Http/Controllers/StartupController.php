@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Mail\InvitSending;
 use App\Startup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -73,11 +72,6 @@ class StartupController extends Controller
         }
         $startup=new Startup();
 
-        $emails[] = \request()->get('tags');
-        \Mail::send(new InvitSending(), [], function($message) use ($emails)
-        {
-            $message->to($emails)->subject('This is test e-mail');
-        });
 
         $startup->name=$request->input('name');
         $startup->description=$request->input('description');

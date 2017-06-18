@@ -15,6 +15,7 @@
                     <div class="col-md-8">
                         <h1> <a href="/startups/{{$startup->id}}"> {{$startup->name}}</a></h1>
                         <strong>CEO:{{$startup->user->name}}</strong>
+                            <div><strong>Category:</strong>{{$startup->category->name}}</div>
                         <small>Creatred On {{$startup->created_at}}  </small>
                     </div>
 

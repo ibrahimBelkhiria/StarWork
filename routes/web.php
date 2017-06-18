@@ -41,6 +41,7 @@ Route::resource('/startups','StartupController');
 
 Route::get('client/project/create','ProjectController@create')->name('client.project.create');
 Route::post('client/project/create','ProjectController@store');
+Route::get('client/project','ProjectController@index')->name('projects');
 Route::get('client/project/{project}','ProjectController@show')->name('client.project');
 Route::get('client/project/{project}/edit','ProjectController@edit')->name('client.project.edit');
 Route::post('client/project/{project}/edit','ProjectController@update')->name('client.project.update');
@@ -48,17 +49,20 @@ Route::delete('client/project/{project}/delete','ProjectController@destroy')->na
 
 
 
-
-
-   //password ressets routes for client
+   // password ressets routes for client
 Route::post('/client/password/email','Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
 Route::get('/client/password/reset','Auth\ClientForgotPasswordController@showLinkRequestForm')->name('client.password.request');
 Route::post('/client/password/reset','Auth\ClientResetPasswordController@reset');
 Route::get('/client/password/reset/{token}','Auth\ClientResetPasswordController@showResetForm')->name('client.password.reset');
 
 
+  // routes for contact the startup emails
+Route::get('/startup/contact/{startup}','ContactController@show')->name('contact.startup');
+Route::post('/startup/contact/{startup}','ContactController@store')->name('contact.startup');
 
-
+  // routes for the project application
+Route::get('/project/application/{project}','ApplicationController@show');
+Route::post('/project/application/{project}','ApplicationController@store');
 
 
 

@@ -25,5 +25,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="//code.jquery.com/jquery.js"></script>
+    @include('flashy::message')
 </body>
 </html>

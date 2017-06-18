@@ -41,11 +41,6 @@
         {{Form::file('cover_image')}}
 
     </div>
-    <div class="form-group">
-        {{Form::label('tags','Send emails to your team in this startup')}}
-        {{Form::text('tags','',['class'=>'form-control','placeholder'=>'Example: John@test.com,test@example.com'])}}
-
-    </div>
 
 
     {{Form::submit('Submit',['class'=>'btn btn-primary'])}}

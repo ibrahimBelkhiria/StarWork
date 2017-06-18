@@ -17,12 +17,14 @@
             <a href="{{$startup->id}}/edit" class="btn btn-primary">Edit</a>
 
 
-            {!! Form::open(['action'=>['StartupController@destroy',$startup->id],'method'=>'POST','class'=>'pull-right']) !!}
+            {!! Form::open(['action'=>['StartupController@destroy',$startup->id],'method'=>'POST']) !!}
 
             {{Form::hidden('_method','DELETE') }}
 
             {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
-        @endif
 
+        @endif
+   @else
+        <a href="/startup/contact/{{$startup->id}}" class="btn btn-primary">Contact</a>
     @endif
 @endsection
