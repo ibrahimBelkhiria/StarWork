@@ -24,4 +24,10 @@ class Startup extends Model
     }
 
 
+    public function startupProjects()
+    {
+        return $this->hasMany('App\StartupProject');
+    }
+
+
 }

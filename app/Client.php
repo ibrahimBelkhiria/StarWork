@@ -31,7 +31,8 @@ class Client extends Authenticatable
     ];
 
 
-    public function projects(){
+    public function projects()
+    {
        return $this->hasMany('App\Project');
     }
 

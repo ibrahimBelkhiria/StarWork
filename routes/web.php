@@ -31,7 +31,6 @@ Route::post('/client/login','Auth\ClientLoginController@login')->name('client.lo
 Route::get('/client', 'ClientController@index')->name('client.dashboard');
 
 
-
 Route::get('/client/register','Auth\ClientRegisterController@showRegistrationForm')->name('client.register');
 Route::post('/client/register','Auth\ClientRegisterController@register')->name('client.register.submit');
 
@@ -65,10 +64,16 @@ Route::get('/project/application/{project}','ApplicationController@show');
 Route::post('/project/application/{project}','ApplicationController@store');
 
 
+   //routes for startup_projects crud
+Route::resource('/startup/project','StartupProjectController');
 
-
-
-
+   //routes for tasks crud
+Route::get('/project/task','TaskController@index')->name('task.list');
+Route::get('/project/{project}/task/create','TaskController@create');
+Route::post('/project/{project}/task','TaskController@store');
+Route::get('/project/task/{task}','TaskController@edit');
+Route::put('/project/task/{task}','TaskController@update');
+Route::delete('/project/task/{task}','TaskController@destroy');
 
 
 

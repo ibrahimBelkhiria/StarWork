@@ -17,13 +17,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the User dashboard. (the startup creator)
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('home');
+        $user=Auth::user();
+        $startup=$user->startup;
+        return view('home',compact('user','startup'));
     }
 
      public function profile()

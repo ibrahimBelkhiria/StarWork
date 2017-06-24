@@ -14,6 +14,8 @@
     <small>{{$startup->created_at}}  by {{$startup->user->name}}</small>
     @if(!Auth::guest())
         @if(Auth::user()->id ==$startup->user_id)
+            <a href="/startup/project" class="btn btn-info pull-right">Show Projects</a>
+
             <a href="{{$startup->id}}/edit" class="btn btn-primary">Edit</a>
 
 
