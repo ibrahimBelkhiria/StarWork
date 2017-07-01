@@ -75,5 +75,6 @@ Route::get('/project/task/{task}','TaskController@edit');
 Route::put('/project/task/{task}','TaskController@update');
 Route::delete('/project/task/{task}','TaskController@destroy');
 
+  //routes for employees
 
-
+Route::resource('/startup/employee','EmployeeController');

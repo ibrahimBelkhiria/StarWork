@@ -22,7 +22,7 @@ class StartupProjectController extends Controller
      */
     public function index()
     {
-        $projects= StartupProject::all();
+        $projects= StartupProject::Where('startup_id',auth()->user()->startup->id)->get();
 
         return view('startupProject.index',compact('projects'));
     }
@@ -74,6 +74,11 @@ class StartupProjectController extends Controller
         $project= StartupProject::find($id);
         $tasks=Task::where('startupproject_id',$id)->get();
 
+        if ($project->startup_id !==auth()->user()->startup->id)
+        {
+            return redirect('/startups')->with('error','You are not authorized to see this !');
+        }
+
         return view('startupProject.show',compact('project','tasks'));
     }
 
@@ -86,6 +91,10 @@ class StartupProjectController extends Controller
     public function edit($id)
     {
         $project=StartupProject::find($id);
+        if ($project->startup_id !==auth()->user()->startup->id)
+        {
+            return redirect('/startups')->with('error','You are not authorized to see this !');
+        }
         return view('startupProject.edit',compact('project'));
     }
 

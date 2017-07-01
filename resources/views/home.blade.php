@@ -8,7 +8,7 @@
                 <div class="panel-heading"><strong>{{$user->name}}</strong> Dashboard</div>
 
                 <div class="panel-body">
-                    Create New Startup <a href="startups/create">from here</a>
+                    Manage your startup from here <a href="startups/{{auth()->user()->startup->id}}">from here</a>
 
                 </div>
             </div>
