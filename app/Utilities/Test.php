@@ -15,9 +15,16 @@ class Test
      */
     public function isClient()
     {
+
         return Auth('client')->check();
 
     }
+
+
+
+
+
+
 
 
 }

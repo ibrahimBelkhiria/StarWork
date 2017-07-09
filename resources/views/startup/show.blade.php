@@ -19,7 +19,7 @@
                 </div>
     @if(!Auth::guest())
         @if(Auth::user()->id ==$startup->user_id)
-            <a href="/startup/project" class="btn btn-info pull-right">Show Projects</a>
+
 
             <a href="{{$startup->id}}/edit" class="btn btn-primary">Edit</a>
 
@@ -30,7 +30,7 @@
 
             {{Form::submit('Delete',['class'=>'btn btn-danger'])}}
             </div>
-            <a href="/startup/employee" class="btn btn-info">Manage employees</a>
+
         @endif
    @else
         <a href="/startup/contact/{{$startup->id}}" class="btn btn-primary">Contact</a>

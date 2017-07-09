@@ -9,8 +9,10 @@
 
                 <div class="panel-body">
                     Manage your startup from here <a href="startups/{{auth()->user()->startup->id}}">from here</a>
-
-                </div>
+                    <div>
+                    <strong>Browse projects <a href="/client/project">From Here </a> </strong>
+                    </div>
+                    </div>
             </div>
         </div>
     </div>

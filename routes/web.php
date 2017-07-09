@@ -64,17 +64,3 @@ Route::get('/project/application/{project}','ApplicationController@show');
 Route::post('/project/application/{project}','ApplicationController@store');
 
 
-   //routes for startup_projects crud
-Route::resource('/startup/project','StartupProjectController');
-
-   //routes for tasks crud
-Route::get('/project/task','TaskController@index')->name('task.list');
-Route::get('/project/{project}/task/create','TaskController@create');
-Route::post('/project/{project}/task','TaskController@store');
-Route::get('/project/task/{task}','TaskController@edit');
-Route::put('/project/task/{task}','TaskController@update');
-Route::delete('/project/task/{task}','TaskController@destroy');
-
-  //routes for employees
-
-Route::resource('/startup/employee','EmployeeController');

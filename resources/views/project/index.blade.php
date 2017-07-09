@@ -2,22 +2,20 @@
 
 @section('content')
 
-    <p class="container">
-    <div class="row">
-        <div class="col-md-12 col-md-offset-8">
-            <strong>You can apply new project</strong>&nbsp;
-            <a href="/client/project/create" class="btn btn-success">Apply</a>
-        </div>
-    </div>
+    <div class="container">
+
+        <h1>List of Projects</h1>
+
+
     <hr>
 
     <table id="users-table" class="table">
         <thead>
         <tr>
-            <td>Project ID</td>
             <td>Title</td>
             <td>Description</td>
             <td>Price</td>
+            <td>Posted By</td>
             <td>Publish at</td>
             <td>Last Updated </td>
             <td>Action</td>
@@ -26,10 +24,10 @@
         <tbody>
         @foreach($projects as $project)
             <tr>
-                <td>{{$project->id}}</td>
                 <td>{{$project->title}}</td>
                 <td>{{$project->description}}</td>
                 <td>{{$project->price}} $</td>
+                <td>{{$project->client->name}}</td>
                 <td>{{$project->created_at->toFormattedDateString()}}</td>
                 <td>{{$project->updated_at->toFormattedDateString()}}</td>
                 <td>
