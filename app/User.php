@@ -35,10 +35,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Startup');
     }
 
-    public function tasks()
-    {
-        return $this->hasMany('App\Task');
-    }
 
 
 }

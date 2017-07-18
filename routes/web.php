@@ -11,6 +11,9 @@
 |
 */
 
+use App\Rating;
+use Illuminate\Support\Facades\DB;
+
 Route::get('/', function () {
     return view('layouts.app');
 });
@@ -46,8 +49,6 @@ Route::get('client/project/{project}/edit','ProjectController@edit')->name('clie
 Route::post('client/project/{project}/edit','ProjectController@update')->name('client.project.update');
 Route::delete('client/project/{project}/delete','ProjectController@destroy')->name('client.project.delete');
 
-
-
    // password ressets routes for client
 Route::post('/client/password/email','Auth\ClientForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
 Route::get('/client/password/reset','Auth\ClientForgotPasswordController@showLinkRequestForm')->name('client.password.request');
@@ -63,4 +64,17 @@ Route::post('/startup/contact/{startup}','ContactController@store')->name('conta
 Route::get('/project/application/{project}','ApplicationController@show');
 Route::post('/project/application/{project}','ApplicationController@store');
 
+//route for ratings
 
+Route::post('/startup/rate','RatingController@create_rate');
+
+
+
+
+//route for some tests
+Route::get('/test',function (){
+
+    $count=DB::table('ratings')->where('startup_id',1)->where('client_id',\auth('client')->user()->id)->count();
+    $check = $count > 0 ? true : false;
+    dd($check  );
+});

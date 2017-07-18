@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{asset('css/star-rating.min.css')}}" rel="stylesheet">
+
+
 </head>
 <body>
     <div id="app">
@@ -24,8 +27,9 @@
     </div>
 
     <!-- Scripts -->
+    <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('js/star-rating.min.js') }}"></script>
     @include('flashy::message')
 </body>
 </html>

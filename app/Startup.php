@@ -24,14 +24,11 @@ class Startup extends Model
     }
 
 
-    public function startupProjects()
+    public function ratings()
     {
-        return $this->hasMany('App\StartupProject');
+        return $this->hasMany(Rating::class);
     }
 
-    public function employees()
-    {
-        return $this->hasMany('App\Employee');
-    }
+
 
 }

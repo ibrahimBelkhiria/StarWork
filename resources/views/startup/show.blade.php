@@ -9,7 +9,51 @@
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-body">
-                <h2>{{$startup->name}}</h2>
+                    <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+                    <script type="text/javascript">
+
+                        $( document ).ready(function() {
+                            $('.rating').on('rating.change', function (event, value, caption) {
+                                var rate_id = $(this).prop('id');
+                                var pure_id = rate_id.substring(6);
+
+                                axios.post('/startup/rate', {
+                                    score: value,
+                                    pid: pure_id
+                                }).then(function (response) {
+                                        $('#' + rate_id).rating('refresh', {
+                                            showClear: false,
+                                            showCaption: false,
+                                            disabled: true,
+                                        });
+
+                                          console.log(response.data);
+                                    }).catch(function (error) {
+                                        console.log(error);
+                                    });
+
+                                });
+                        });
+
+                    </script>
+
+
+
+
+
+
+                    @if(auth('client')->check())
+                        <label for=""> Rate this Startup</label>
+         <input id="input-{{$startup->id}}" name="rating" class="rating rating-loading xs "
+
+            value="{{$rate}}"
+
+
+           data-min="0" data-max="5" data-step="0.5" data-size="xs">
+                    @endif
+                  <h2>{{$startup->name}}</h2>
+
+
     <img style="width: 70px" src="/storage/cover_images/{{$startup->cover_image}}" > <span><strong>CEO:</strong>{{$startup->user->name}}</span>
     <div><strong>Category: </strong>{{$startup->category->name}}</div>
     <div><strong>Description :</strong> {{$startup->description}}</div>

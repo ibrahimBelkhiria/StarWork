@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Rating;
 use App\Startup;
-use App\StartupProject;
+use App\Utilities\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class StartupController extends Controller
@@ -95,7 +98,19 @@ class StartupController extends Controller
     {
         $startup=Startup::find($id);
 
-        return view('startup.show',compact('startup'));
+        $result= DB::table('ratings')
+            ->where('startup_id', $startup->id)
+            ->avg('rate');
+
+           $rate=intval($result);
+
+
+       $count=DB::table('ratings')->where('startup_id',$startup->id)->where('client_id',\auth('client')->user()->id)->count();
+
+        $check = $count > 0 ? true : false;
+
+
+        return view('startup.show',compact('startup','rate','check'));
     }
 
     /**
@@ -193,4 +208,56 @@ class StartupController extends Controller
         return redirect('/startups')->with('success','Startup Removed');
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**  public  function create_Rate(Request $request)
+    {
+        $test=new Test();
+        $startup_id=$request->pid;
+        $client_id=auth('client')->user()->id;
+        $rate=$request->score;
+
+        $rated=Rating::where('startup_id',$startup_id)->where('client_id',$client_id)->count();
+            if ($rated >0)
+            {
+
+                $test->update_rate($startup_id,$rate,$client_id);
+            }
+        else{
+            $test->insert_rate($startup_id,$rate,$client_id);
+
+           }
+
+          $total=DB::table('ratings')->where('startup_id',$startup_id)->count();
+          $rates=DB::table('ratings')->select('total_points')->where('startup_id',$startup_id)->get()->sum();
+        $rate+=$rates/$total;
+
+        return view('startup.show',compact('rate'));
+
+
+    }
+  **/
+
+
+
+
+
 }
